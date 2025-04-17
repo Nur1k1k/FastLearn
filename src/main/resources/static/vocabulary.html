@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><!DOCTYPE html>
+      <html lang="ru">
+      <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>FastLearn - Выберите слово</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #1cb0f6;
+      --primary-hover: #0d9ae5;
+      --text-color: #333;
+      --bg-color: #f9f9f9;
+      --white: #ffffff;
+      --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      --border-radius: 12px;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .quiz-container {
+      background-color: var(--white);
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      padding: 30px;
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+    }
+
+    .quiz-title {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 30px;
+      color: var(--primary-color);
+    }
+
+    .options-container {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 20px;
+      background-color: var(--white);
+      border: 2px solid #e0e0e0;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .option:hover {
+      border-color: var(--primary-color);
+      transform: translateY(-2px);
+    }
+
+    .option-number {
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .buttons-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .btn {
+      padding: 12px 25px;
+      border: none;
+      border-radius: var(--border-radius);
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn-skip {
+      background-color: #f0f0f0;
+      color: var(--text-color);
+    }
+
+    .btn-check {
+      background-color: var(--primary-color);
+      color: var(--white);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+    }
+
+    .btn-check:hover {
+      background-color: var(--primary-hover);
+    }
+  </style>
+</head>
+<body>
+<div class="quiz-container">
+  <h1 class="quiz-title">Выберите слово «молоко»</h1>
+
+  <div class="options-container">
+    <div class="option">
+      <span>milk</span>
+      <span class="option-number">1</span>
+    </div>
+
+    <div class="option">
+      <span>bread</span>
+      <span class="option-number">2</span>
+    </div>
+
+    <div class="option">
+      <span>butter</span>
+      <span class="option-number">3</span>
+    </div>
+  </div>
+
+  <div class="buttons-container">
+    <button class="btn btn-skip">ПРОПУСТИТЬ</button>
+    <button class="btn btn-check">ПРОВЕРИТЬ</button>
+  </div>
+</div>
+</body>
