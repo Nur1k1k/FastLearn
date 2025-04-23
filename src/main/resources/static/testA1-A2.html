@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Тест по казахскому языку</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f0f8ff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 600px;
+      padding: 30px 40px;
+      box-sizing: border-box;
+      animation: fadeIn 0.8s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    #question-text {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .answer {
+      margin: 10px 0;
+      display: flex;
+      align-items: center;
+      font-size: 16px;
+    }
+
+    .answer input[type="radio"] {
+      margin-right: 10px;
+      accent-color: #27ae60;
+      transform: scale(1.2);
+    }
+
+    button {
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 24px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+      width: 100%;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #219150;
+    }
+
+    #result {
+      text-align: center;
+    }
+
+    .reward-icon {
+      font-size: 60px;
+      color: gold;
+      margin-bottom: 10px;
+    }
+
+    .points {
+      font-size: 24px;
+      font-weight: bold;
+      color: #34495e;
+    }
+
+    .message {
+      font-size: 20px;
+      color: #2c3e50;
+      margin-top: 10px;
+    }
+
+    .restart-btn {
+      margin-top: 30px;
+      background-color: #3498db;
+    }
+
+    .restart-btn:hover {
+      background-color: #2c80b4;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>Тест для начинающих: Казахский язык</h1>
+  <button onclick="startTest()">Начать тест</button>
+
+  <div id="question-container" style="display:none;">
+    <p id="question-text"></p>
+    <div id="answers"></div>
+    <button onclick="nextQuestion()">Далее</button>
+  </div>
+
+  <div id="result" style="display:none;">
+    <div class="reward-icon">🏅</div>
+    <h2>Результат</h2>
+    <p class="points" id="score-text"></p>
+    <p class="message" id="message-text"></p>
+    <button class="restart-btn" onclick="restartTest()">Пройти снова 🔁</button>
+  </div>
+</div>
+
+<script>
+  const questions = [
+    {
+      question: "Что означает слово 'сәлем'?",
+      options: ["Здравствуйте", "Пока", "Спасибо", "Пожалуйста"],
+      correct: 0
+    },
+    {
+      question: "Как по-казахски будет 'спасибо'?",
+      options: ["рахмет", "асылы", "қош", "жақсы"],
+      correct: 0
+    },
+    {
+      question: "Что означает слово 'үй'?",
+      options: ["Дом", "Школа", "Машина", "Вода"],
+      correct: 0
+    },
+    {
+      question: "Что означает слово 'су'?",
+      options: ["Вода", "Огонь", "Воздух", "Земля"],
+      correct: 0
+    },
+    {
+      question: "Как по-казахски 'да'?",
+      options: ["иә", "жоқ", "бар", "сен"],
+      correct: 0
+    },
+    {
+      question: "Как по-казахски 'нет'?",
+      options: ["иә", "жоқ", "бар", "сен"],
+      correct: 1
+    },
+    {
+      question: "Какая буква обозначает звук [ә]?",
+      options: ['A', 'Ә', 'Б', 'Г'],
+      correct: 1
+    },
+    {
+      question: "Что означает слово 'кітап'?",
+      options: ["Книга", "Ручка", "Стол", "Стул"],
+      correct: 0
+    },
+    { 
+      question: "Что означает слово 'жақсы'?",
+      options: ["Хорошо", "Плохо", "Маленький", "Большой"],
+      correct: 0
+    },
+    {
+      question: "Что означает слово 'мектеп'?",
+      options: ["Школа", "Университет", "Магазин", "Больница"],
+      correct: 0
+    }
+  ];
+
+  let currentQuestion = 0;
+  let correctAnswers = 0;
+
+  function startTest() {
+    document.querySelector("button").style.display = "none";
+    document.getElementById("question-container").style.display = "block";
+    showQuestion();
+  }
+
+  function showQuestion() {
+    const q = questions[currentQuestion];
+    document.getElementById("question-text").textContent = `Вопрос ${currentQuestion + 1}: ${q.question}`;
+    const answersDiv = document.getElementById("answers");
+    answersDiv.innerHTML = "";
+
+    q.options.forEach((opt, index) => {
+      const div = document.createElement("div");
+      div.className = "answer";
+
+      const input = document.createElement("input");
+      input.type = "radio";
+      input.name = "answer";
+      input.value = index;
+      input.id = "opt" + index;
+
+      const label = document.createElement("label");
+      label.htmlFor = input.id;
+      label.textContent = opt;
+
+      div.appendChild(input);
+      div.appendChild(label);
+      answersDiv.appendChild(div);
+    });
+  }
+
+  function nextQuestion() {
+    const selected = document.querySelector('input[name="answer"]:checked');
+    if (!selected) {
+      alert("Пожалуйста, выберите ответ.");
+      return;
+    }
+
+    if (parseInt(selected.value) === questions[currentQuestion].correct) {
+      correctAnswers++;
+    }
+
+    currentQuestion++;
+
+    if (currentQuestion < questions.length) {
+      showQuestion();
+    } else {
+      showResult();
+    }
+  }
+
+  function showResult() {
+    document.getElementById("question-container").style.display = "none";
+    document.getElementById("result").style.display = "block";
+    document.getElementById("score-text").textContent = `+${correctAnswers * 10} XP`;
+
+    const message = document.getElementById("message-text");
+    if (correctAnswers === questions.length) {
+      message.textContent = "Идеально! Ты мастер казахского языка! 🏆";
+    } else if (correctAnswers >= 7) {
+      message.textContent = "Отлично! Продолжай в том же духе! 👏";
+    } else if (correctAnswers >= 4) {
+      message.textContent = "Неплохо! Но можно лучше! 💪";
+    } else {
+      message.textContent = "Попробуй ещё раз! Ты сможешь! 🌱";
+    }
+  }
+
+  function restartTest() {
+    currentQuestion = 0;
+    correctAnswers = 0;
+    document.getElementById("result").style.display = "none";
+    document.querySelector("button").style.display = "block";
+  }
+</script>
+
+</body>
+</html>

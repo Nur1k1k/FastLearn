@@ -27,6 +27,10 @@
             z-index: 99;
         }
 
+        .sidebar.hidden {
+            transform: translateX(-100%);
+        }
+
         .toggle-btn {
             position: fixed;
             top: 20px;
@@ -51,12 +55,7 @@
         }
 
         .toggle-btn .arrow {
-            font-size: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .sidebar.hidden ~ .toggle-btn .arrow {
-            transform: rotate(180deg);
+            font-size: 24px;
         }
 
         .logo {
@@ -178,14 +177,14 @@
 <div class="sidebar" id="sidebar">
     <div class="logo">FastLearn</div>
     <a href="#" class="active">🏠 ОБУЧЕНИЕ</a>
-    <a href="#">👄 ЗВУКИ</a>
+    <a onclick="window.location.href='/alphabet.html'">👄 ЗВУКИ</a>
     <a href="#">🛡️ РЕЙТИНГИ</a>
     <a href="#">📌 ЗАДАНИЯ</a>
     <a href="#">👤 ПРОФИЛЬ</a>
 </div>
 
 <button class="toggle-btn" onclick="toggleSidebar()">
-    <span class="arrow">←</span>
+    <span class="arrow">☰</span>
 </button>
 
 <div class="main" id="main">
@@ -194,13 +193,13 @@
     </div>
 
     <div class="circle-layout">
-        <img src="/duo.png" alt="Duo" class="center-image" />
+        <img src="/images/fastlearn-logo.png" alt="FastLearn" class="center-image" />
         <button class="menu-button">Курсы</button>
         <button class="menu-button" onclick="window.location.href='/vocabulary.html'">Словарь</button>
         <button class="menu-button">Грамматика</button>
         <button class="menu-button">Произношение</button>
-        <button class="menu-button">Тест</button>
-        <button class="menu-button">Топик</button>
+        <button class="menu-button" onclick="window.location.href='/test.html'">Тест</button>
+        <button class="menu-button" onclick="window.location.href='/topic.html'">Топик</button>
     </div>
 
     <div class="card">
@@ -221,5 +220,6 @@
         sidebar.classList.toggle("hidden");
     }
 </script>
+
 </body>
 </html>

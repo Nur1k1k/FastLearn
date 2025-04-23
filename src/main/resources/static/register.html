@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="kk">
+<head>
+    <meta charset="UTF-8">
+    <title>Казахская азбука</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f0f8ff;
+            padding: 40px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+
+        .letters {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .letter {
+            background-color: #3498db;
+            color: white;
+            font-size: 28px;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .letter:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Казахская азбука</h1>
+<div class="letters" id="letters-container">
+    <!-- Буквы появятся здесь через JS -->
+</div>
+
+<script>
+    // Список казахских букв
+    const kazakhLetters = [
+        'А', 'Ә', 'Б', 'В', 'Г', 'Ғ', 'Д', 'Е', 'Ё', 'Ж', 'З',
+        'И', 'Й', 'К', 'Қ', 'Л', 'М', 'Н', 'Ң', 'О', 'Ө', 'П',
+        'Р', 'С', 'Т', 'У', 'Ұ', 'Ү', 'Ф', 'Х', 'Һ', 'Ц', 'Ч',
+        'Ш', 'Щ', 'Ы', 'І', 'Э', 'Ю', 'Я'
+    ];
+
+    const container = document.getElementById("letters-container");
+
+    kazakhLetters.forEach(letter => {
+        const div = document.createElement("div");
+        div.className = "letter";
+        div.textContent = letter;
+
+        div.addEventListener("click", () => {
+            const audio = new Audio(`audio/${letter}.mp3`);
+            audio.play();
+        });
+
+        container.appendChild(div);
+    });
+</script>
+
+</body>
+</html>

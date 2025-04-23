@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+</head>
+<body>
+<h2>My Profile</h2>
+<div id="profile"></div>
+
+<script>
+    async function loadProfile() {
+        const token = localStorage.getItem("token");
+        const response = await fetch("/profile", {
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        });
+
+        if (response.ok) {
+            const data = await response.text(); // или .json() если отдаешь JSON
+            document.getElementById("profile").innerHTML = data;
+        } else {
+            document.getElementById("profile").innerHTML = "Unauthorized. Please login.";
+        }
+    }
+
+    loadProfile();
+</script>
+</body>
+</html>
